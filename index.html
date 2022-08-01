@@ -9,12 +9,128 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <header>
+
+<body class="background-grey">
+  <header class="background-lightblue font-size2r">
+
+    <div class="container">
+      <div class="row margin-b10"> <!-- add margin-b10 -->
+
+        <div class="col-50 row justify-between justify-center-nav align-center">
+          <!-- <nav class="inline-block"> -->
+          <a href="#" class="no-underline font-black margin-r35">Anime</a>
+          <!-- </nav> -->
+          <!-- <nav class="inline-block"> -->
+          <a href="#" class="no-underline font-black">Favorite</a>
+          <!-- </nav> -->
+        </div>
+
+        <div class="row col-50 justify-between justify-center-nav align-center">
+          <div class="inline-block">Genre</div>
+          <div class="inline-block margin-l35 padding-b10">
+            <select name="genre" id="genre" class="select-box font-grey">
+              <option disabled="disabled" selected="selected">Select</option>
+              <option value="Action" class="font-black">Action</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </header>
+
+
   <main>
+    <div class="container">
+      <h2 class="text-center">Not Sure What to Watch? Here are Some of Our Recommendations</h2>
+
+      <div>
+        <div class="random row">
+
+
+
+
+        </div>
+      </div>
+
+    </div>
   </main>
+
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
+
+
+<!-- LAYOUT MODEL
+
+  <div class="col-50 padding-0-7-20">
+    <div class="row wrapper col-full col-50 justify-center align-center padding-10">
+      <div class="col-full col-50 shadow">
+        <img src="images/121645l.jpg" alt="">
+      </div>
+      <div class="col-full col-50 info-col-padding align-self-start">
+        <div class="row">
+          <h4 class="title">Dragon Ball Z</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-50 padding-0-7-20">
+    <div class="row wrapper col-full col-50 justify-center align-center padding-10">
+      <div class="col-full col-50 shadow">
+        <img src="images/86334l.jpg" alt="">
+      </div>
+      <div class="col-full col-50 info-col-padding align-self-start">
+        <div class="row">
+          <h4>Hajime no Ippo</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-50 padding-0-7-20">
+    <div class="row wrapper col-full col-50 justify-center align-center padding-10">
+      <div class="col-full col-50 shadow">
+        <img src="images/Slam Dunk.jpg" alt="">
+      </div>
+      <div class="col-full col-50 info-col-padding align-self-start">
+        <div class="row">
+          <h4>Slam Dunk</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <li class="row wrapper col-full col-50">
+    <div class="col-full col-50">
+      <img src="https://cdn.myanimelist.net/images/anime/3/88467l.jpg" alt="">
+    </div>
+    <div class="col-full col-50 info-col">
+      <div class="row">
+        <div class="col-full">
+          <button>Add to Favorite</button>
+        </div>
+        <h4>Kinako Movie x Mameshiba</h4>
+        <p>
+          A collaboration between Mameshiba and Kinako, a 2010 Japanese film based on a true story of a dog trainer,
+          meant
+          to
+          promote the latter's release the following month.
+        </p>
+      </div>
+    </div>
+  </li>
+
+ -->

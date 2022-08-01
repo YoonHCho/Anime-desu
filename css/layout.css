@@ -1,0 +1,29 @@
+.hidden {
+  display: none !important;
+}
+
+.container {
+  max-width: 575px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-full,
+.col-50 {
+  flex-basis: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 1200px;
+  }
+
+  .col-50 {
+    flex-basis: 50%;
+  }
+}

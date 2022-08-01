@@ -1,0 +1,126 @@
+.background-grey {
+  background-color: #e0e2e3;
+}
+
+.background-lightblue {
+  background-color: #e3f2fd;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.no-underline {
+  text-decoration: none;
+}
+
+select:hover {
+  cursor: pointer;
+}
+
+.select-box {
+  width: 220px;
+  height: 36px;
+  border-radius: 5px;
+}
+
+.font-black {
+  color: black;
+}
+
+.font-grey {
+  color: #6c757d;
+}
+
+.font-size2r {
+  font-size: 2rem;
+}
+
+.margin-b10 {
+  margin-bottom: 10px;
+}
+
+.padding-0-7-20 {
+  padding: 0 7px 20px;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-b10 {
+  padding-bottom: 10px;
+}
+
+.padding-l10 {
+  padding-left: 10px;
+}
+
+/* below this for each cards image/title/synopsis */
+
+.wrapper {
+  background-color: white;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+}
+
+img {
+  width: 100%;
+}
+
+.info-col-padding {
+  padding: 5px 5px 5px 7px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.shadow {
+  box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
+  border-radius: 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  .margin-r35 {
+    margin-right: 35px;
+  }
+
+  .margin-l35 {
+    margin-left: 35px;
+  }
+
+  .justify-center-nav {
+    justify-content: center;
+  }
+
+  img {
+    width: 100%;
+    height: 260px;
+    object-fit: scale-down;
+  }
+}
+
+@media only screen and (min-width: 1160px) {
+  img {
+    width: 261px;
+    height: 400px;
+  }
+}
