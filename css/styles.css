@@ -91,6 +91,10 @@ img {
   width: 100%;
 }
 
+.title-font {
+  font-size: 11px;
+}
+
 .info-col-padding {
   padding: 5px 5px 5px 7px;
 }

@@ -5,26 +5,28 @@ var random = [];
 var $xhrRandom = new XMLHttpRequest();
 var randomPage = Math.floor(Math.random() * 934 + 1);
 $xhrRandom.open('GET', 'https://api.jikan.moe/v4/anime?sfw=true&page=' + randomPage);
-
 $xhrRandom.responseType = 'json';
-
 $xhrRandom.addEventListener('load', loading);
 
 function loading(event) {
   random.push($xhrRandom.response);
+  var randomArray = [];
+  for (var a = 0; a < random[0].data.length; a++) {
+    randomArray.push(random[0].data[a]);
+  }
 
   var $randomDivEl = document.querySelector('.random');
 
   for (var i = 0; i < 3; i++) {
     var title = '';
     var imgUrl;
-    var randomData = parseInt(Math.floor(Math.random() * random[0].data.length));
-    if (random[0].data[randomData].images.jpg.large_image_url) {
-      imgUrl = random[0].data[randomData].images.jpg.large_image_url;
-      if (random[0].data[randomData].title_english) {
-        title = random[0].data[randomData].title_english;
+    var randomData = parseInt(Math.floor(Math.random() * randomArray.length));
+    if (randomArray[randomData].images.jpg.large_image_url) {
+      imgUrl = randomArray[randomData].images.jpg.large_image_url;
+      if (randomArray[randomData].title_english) {
+        title = randomArray[randomData].title_english;
       } else {
-        title = random[0].data[randomData].title;
+        title = randomArray[randomData].title;
       }
     } else {
       imgUrl = 'images/placeholder-image-square.jpg';
@@ -43,7 +45,7 @@ function loading(event) {
     var $rowDiv = document.createElement('div');
     $rowDiv.className = 'row';
     var $titleHeader = document.createElement('h4');
-    $titleHeader.className = 'title';
+    $titleHeader.className = 'title-font';
     $titleHeader.textContent = title;
 
     $rowDiv.appendChild($titleHeader);
@@ -53,6 +55,7 @@ function loading(event) {
     $wrapperDiv.appendChild($infoColDiv);
     $mainDiv.appendChild($wrapperDiv);
     $randomDivEl.appendChild($mainDiv);
+    randomArray.splice(randomData, 1);
   }
 }
 
