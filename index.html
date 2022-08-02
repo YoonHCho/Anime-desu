@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
@@ -9,11 +12,37 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <header>
+
+<body class="background-grey">
+  <header class="background-lightblue font-size2r">
+
+    <div class="container">
+      <div class="row margin-b10">
+
+        <div class="col-50 row justify-between justify-center-nav align-center">
+          <a href="#" class="no-underline font-black margin-r35">Anime</a>
+        </div>
+
+      </div>
+    </div>
+
   </header>
+
+
   <main>
+    <div class="container">
+      <h2 class="text-center">Not Sure What to Watch? Here are Some of Our Recommendations</h2>
+
+      <div>
+        <div class="random row">
+          <!-- This is where the random recmd will show -->
+        </div>
+      </div>
+
+    </div>
   </main>
+
+
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
