@@ -123,14 +123,17 @@ img {
 
   img {
     width: 100%;
-    height: 260px;
-    object-fit: scale-down;
+    height: 100%;
+  }
+
+  .wrapper {
+    height: 440px;
   }
 }
 
-@media only screen and (min-width: 1160px) {
+/* @media only screen and (min-width: 1160px) {
   img {
     width: 261px;
     height: 400px;
   }
-}
+} */
