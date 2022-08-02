@@ -1,3 +1,9 @@
+* {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
 .background-grey {
   background-color: #e0e2e3;
 }
