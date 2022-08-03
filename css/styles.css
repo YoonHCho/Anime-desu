@@ -40,6 +40,10 @@ select:hover {
   cursor: pointer;
 }
 
+select option:first-child {
+  color: grey;
+}
+
 .select-box {
   width: 220px;
   height: 36px;
@@ -48,6 +52,10 @@ select:hover {
 
 .font-black {
   color: black;
+}
+
+.heights {
+  height: 60px;
 }
 
 .font-grey {
@@ -70,10 +78,6 @@ select:hover {
   padding: 10px;
 }
 
-.padding-b10 {
-  padding-bottom: 10px;
-}
-
 .padding-l10 {
   padding-left: 10px;
 }
@@ -92,7 +96,7 @@ img {
 }
 
 .title-font {
-  font-size: 11px;
+  font-size: 16px;
 }
 
 .info-col-padding {
@@ -123,11 +127,16 @@ img {
 
   img {
     width: 100%;
-    height: 100%;
+    max-height: 400px;
   }
 
   .wrapper {
     height: 440px;
+  }
+
+  .nav-height {
+    height: 65px;
+    line-height: 65px;
   }
 }
 
