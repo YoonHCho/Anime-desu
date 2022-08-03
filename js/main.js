@@ -107,22 +107,25 @@ function selectGenre(event) {
   var $xhrGenre = new XMLHttpRequest();
   $xhrGenre.open('GET', 'https://api.jikan.moe/v4/anime?genres=' + $genreID + '&page=1&sfw=true');
   $xhrGenre.responseType = 'json';
-  $xhrGenre.addEventListener('load', getGenre);
-  var genreObj = {};
-  function getGenre() {
-    for (var i = 0; i < 12; i++) {
-      if ($xhrGenre.response.data[i].images.jpg.large_image_url) {
-        genreObj.imgUrl = $xhrGenre.response.data[i].images.jpg.large_image_url;
-        if ($xhrGenre.response.data[i].title_english) {
-          genreObj.title = $xhrGenre.response.data[i].title_english;
-        } else {
-          genreObj.title = $xhrGenre.response.data[i].title;
-        }
-      } else {
-        genreObj.imgUrl = 'images/placeholder-image-square.jpg';
-      }
-      $genreDivEl.appendChild(renderLists(genreObj));
-    }
-  }
+  $xhrGenre.addEventListener('load', function () {
+    getGenre($xhrGenre.response);
+  });
   $xhrGenre.send();
+}
+
+function getGenre(genre) {
+  for (var i = 0; i < 12; i++) {
+    var genreObj = {};
+    if (genre.data[i].images.jpg.large_image_url) {
+      genreObj.imgUrl = genre.data[i].images.jpg.large_image_url;
+      if (genre.data[i].title_english) {
+        genreObj.title = genre.data[i].title_english;
+      } else {
+        genreObj.title = genre.data[i].title;
+      }
+    } else {
+      genreObj.imgUrl = 'images/placeholder-image-square.jpg';
+    }
+    $genreDivEl.appendChild(renderLists(genreObj));
+  }
 }
