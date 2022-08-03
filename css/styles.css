@@ -40,10 +40,6 @@ select:hover {
   cursor: pointer;
 }
 
-select option:first-child {
-  color: grey;
-}
-
 .select-box {
   width: 220px;
   height: 36px;
@@ -56,10 +52,6 @@ select option:first-child {
 
 .heights {
   height: 60px;
-}
-
-.font-grey {
-  color: #6c757d;
 }
 
 .font-size2r {

@@ -18,19 +18,6 @@ var data = {
       suspense: '41'
     }
   ],
-  genreList: [],
   favorite: [],
   favoriteId: 1
 };
-
-/* var previousDataJSON = localStorage.getItem('ajax-local-storage');
-if (previousDataJSON !== null) {
-  data = JSON.parse(previousDataJSON);
-}
-
-window.addEventListener('beforeunload', beforeCloseWindow);
-function beforeCloseWindow(event) {
-  var dataJSON = JSON.stringify(data);
-  localStorage.setItem('ajax-local-storage', dataJSON);
-}
- */
