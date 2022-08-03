@@ -20,13 +20,18 @@ function loading(event) {
     var randomData = parseInt(Math.floor(Math.random() * random[0].data.length));
     if (random[0].data[randomData].images.jpg.large_image_url) {
       randomObj.imgUrl = random[0].data[randomData].images.jpg.large_image_url;
-      if (random[0].data[randomData].title_english) {
-        randomObj.title = random[0].data[randomData].title_english;
-      } else {
-        randomObj.title = random[0].data[randomData].title;
-      }
     } else {
       randomObj.imgUrl = 'images/placeholder-image-square.jpg';
+    }
+    if (random[0].data[randomData].title_english) {
+      randomObj.title = random[0].data[randomData].title_english;
+    } else {
+      randomObj.title = random[0].data[randomData].title;
+    }
+    if (random[0].data[randomData].synopsis) {
+      randomObj.synopsis = random[0].data[randomData].synopsis;
+    } else {
+      randomObj.synopsis = 'No synopsis information has been added to this title.';
     }
 
     $randomDivEl.appendChild(renderLists(randomObj));
@@ -40,18 +45,22 @@ function renderLists(obj) {
   var $wrapperDiv = document.createElement('div');
   $wrapperDiv.className = 'row wrapper col-full col-50 justify-center align-center padding-10';
   var $imgDiv = document.createElement('div');
-  $imgDiv.className = 'col-full col-50 shadow';
+  $imgDiv.className = 'col-full col-50 shadow align-self-start';
   var $img = document.createElement('img');
   $img.setAttribute('src', obj.imgUrl);
   var $infoColDiv = document.createElement('div');
-  $infoColDiv.className = 'col-full col-50 info-col-padding align-self-start';
+  $infoColDiv.className = 'col-full col-50 info-col-padding align-self-start height-100';
   var $rowDiv = document.createElement('div');
-  $rowDiv.className = 'row';
+  $rowDiv.className = 'row height-100';
   var $titleHeader = document.createElement('h4');
   $titleHeader.className = 'title-font';
   $titleHeader.textContent = obj.title;
+  var $paragraph = document.createElement('p');
+  $paragraph.className = 'height-78 info-para overflow-ellipsis';
+  $paragraph.textContent = obj.synopsis;
 
   $rowDiv.appendChild($titleHeader);
+  $rowDiv.appendChild($paragraph);
   $infoColDiv.appendChild($rowDiv);
   $imgDiv.appendChild($img);
   $wrapperDiv.appendChild($imgDiv);
@@ -118,13 +127,18 @@ function getGenre(genre) {
     var genreObj = {};
     if (genre.data[i].images.jpg.large_image_url) {
       genreObj.imgUrl = genre.data[i].images.jpg.large_image_url;
-      if (genre.data[i].title_english) {
-        genreObj.title = genre.data[i].title_english;
-      } else {
-        genreObj.title = genre.data[i].title;
-      }
     } else {
       genreObj.imgUrl = 'images/placeholder-image-square.jpg';
+    }
+    if (genre.data[i].title_english) {
+      genreObj.title = genre.data[i].title_english;
+    } else {
+      genreObj.title = genre.data[i].title;
+    }
+    if (genre.data[i].synopsis) {
+      genreObj.synopsis = genre.data[i].synopsis;
+    } else {
+      genreObj.synopsis = 'No synopsis information has been added to this title.';
     }
     $genreDivEl.appendChild(renderLists(genreObj));
   }
