@@ -16,11 +16,32 @@
 <body class="background-grey">
   <header class="background-lightblue font-size2r">
 
-    <div class="container">
-      <div class="row margin-b10">
+    <div class="container nav-height">
+      <div class="row margin-b10 align-center">
 
-        <div class="col-50 row justify-between justify-center-nav align-center">
-          <a href="#" class="no-underline font-black margin-r35">Anime</a>
+        <div class="col-50 row justify-between justify-center-nav align-center heights">
+          <a href="" class="no-underline font-black margin-r35 anime-random">Anime</a>
+        </div>
+
+        <div class="row col-50 justify-between justify-center-nav align-center heights">
+          <div class="inline-block">Genre</div>
+          <div class="inline-block margin-l35 select-font-size">
+            <select name="genre" id="genre" class="select-box select-font-size">
+              <option value="select" selected disabled hidden>Select</option>
+              <option value="action">Action</option>
+              <option value="adventure">Adventure</option>
+              <option value="comedy">Comedy</option>
+              <option value="drama">Drama</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="mystery">Mystery</option>
+              <option value="psychological">Psychological</option>
+              <option value="sliceOfLife">Slice of Life</option>
+              <option value="sciFi">Sci-Fi</option>
+              <option value="sports">Sports</option>
+              <option value="supernatural">Supernatural</option>
+              <option value="suspense">Suspense</option>
+            </select>
+          </div>
         </div>
 
       </div>
@@ -31,11 +52,22 @@
 
   <main>
     <div class="container">
-      <h2 class="text-center">Not Sure What to Watch? Here are Some of Our Recommendations</h2>
 
-      <div>
-        <div class="random row">
-          <!-- This is where the random recmd will show -->
+      <div class="random-view">
+        <h2 class="text-center">Not Sure What to Watch? Here are Some of Our Recommendations</h2>
+        <div>
+          <div class="random row">
+            <!-- This is where the random recmd will show -->
+          </div>
+        </div>
+      </div>
+
+      <div class="genre-view hidden">
+        <h3 class="genre-text text-center">Results for Genre: </h3>
+        <div>
+          <div class="genre row">
+            <!-- This is where genre list will render -->
+          </div>
         </div>
       </div>
 
