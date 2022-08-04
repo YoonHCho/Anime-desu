@@ -53,7 +53,7 @@ function loading(event) {
 
 function renderLists(obj) {
   var $mainDiv = document.createElement('div');
-  $mainDiv.className = 'col-50 padding-0-7-20';
+  $mainDiv.className = 'col-50 padding-0-7-20 render-div';
   var $wrapperDiv = document.createElement('div');
   $wrapperDiv.className = 'row wrapper col-full col-50 justify-center align-center padding-10';
   var $imgDiv = document.createElement('div');
@@ -75,9 +75,17 @@ function renderLists(obj) {
   var $buttonDiv = document.createElement('div');
   $buttonDiv.className = 'col-full text-center padding-t20-button';
   var $button = document.createElement('button');
-  $button.className = 'fav-btn-false';
   $button.setAttribute('data-malId', $malId);
+  $button.className = 'fav-btn-false';
   $button.textContent = 'Add to Favorite';
+  if (data.favorite.length !== 0) {
+    for (var i = 0; i < data.favorite.length; i++) {
+      if ($malId === data.favorite[i].malId) {
+        $button.textContent = 'Added to Favorite';
+        $button.className = 'fav-btn-true';
+      }
+    }
+  }
 
   $buttonDiv.appendChild($button);
 
@@ -168,23 +176,32 @@ function getGenre(genre) {
 
     genreObj.malId = genre.data[i].mal_id;
     $malId = genre.data[i].mal_id;
-    // console.log('mal id on genre', genre.data[i].mal_id);
-    // console.log('global $malId for genre', $malId);
     onPage.push(genreObj);
     $genreDivEl.appendChild(renderLists(genreObj));
   }
 }
 
 // FEATURE 4 for favorite button bubbling and capturing
-// $selectGenre.addEventListener('click', favoriteButton);
 
 var $favBtn = document.querySelector('.main-container');
 
 $favBtn.addEventListener('click', favoriteButton);
-function favoriteButton(event) {
 
-  // console.log(event.target.getAttribute('data-malid'));
-  // use the event target to change the className to change the color of the button.
+function favoriteButton(event) {
+  if (event.target.getAttribute('class') === 'fav-btn-false') {
+    event.target.className = 'fav-btn-true';
+    event.target.textContent = 'Added to Favorite';
+    for (var i = 0; i < onPage.length; i++) {
+      if (onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
+        data.favorite.unshift(onPage[i]);
+      }
+    }
+  }
 }
-// var $favButton = document.querySelector('button');
-// $favButton.addEventListener('click', favoriteButton);
+
+// *** BELOW IS FOR THE DOM how it will render HTML***
+// if (event.target.tagName === 'BUTTON') {
+//   // debugger;
+//   var $closestAncestor = event.target.closest('.render-div');
+//   console.log('closest .render-div: ', $closestAncestor);
+// }
