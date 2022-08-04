@@ -4,6 +4,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Yellowtail&display=swap" rel="stylesheet">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
@@ -21,13 +22,14 @@
 
         <div class="col-50 row justify-between justify-center-nav align-center heights">
           <a href="" class="no-underline font-black margin-r35 anime-random">Anime</a>
+          <a href="" class="no-underline font-black anime-favorite">Favorite</a>
         </div>
 
         <div class="row col-50 justify-between justify-center-nav align-center heights">
           <div class="inline-block">Genre</div>
           <div class="inline-block margin-l35 select-font-size">
             <select name="genre" id="genre" class="select-box select-font-size">
-              <option value="select" selected disabled hidden>Select</option>
+              <option value="select" selected hidden>Select</option>
               <option value="action">Action</option>
               <option value="adventure">Adventure</option>
               <option value="comedy">Comedy</option>
@@ -67,6 +69,16 @@
         <div>
           <div class="genre row" id="fav-button">
             <!-- This is where genre list will render -->
+          </div>
+        </div>
+      </div>
+
+      <div class="favorite-view hidden">
+        <h3 class="font-yellowtail">My Favorites</h3>
+        <h4 class="default-no-fav text-center">There Are No Favorite Animes Added</h4>
+        <div>
+          <div class="favorite row">
+            <!-- This is where favorite list will render -->
           </div>
         </div>
       </div>

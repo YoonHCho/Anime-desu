@@ -3,11 +3,16 @@ var onPage = [];
 var $malId;
 
 var $animeRandom = document.querySelector('.anime-random');
-$animeRandom.addEventListener('click', loadview);
+$animeRandom.addEventListener('click', function () {
+  $animeRandom.preventDefault();
+  data.view = 'random-view';
+  loadView(data.view);
+});
 
 // Feature 1 START
 var $randomDivEl = document.querySelector('.random');
 var $genreDivEl = document.querySelector('.genre');
+var $favoriteDivEl = document.querySelector('.favorite');
 
 var $xhrRandom = new XMLHttpRequest();
 var randomPage = Math.floor(Math.random() * 934 + 1);
@@ -47,6 +52,7 @@ function loading(event) {
 }
 
 function renderLists(obj) {
+
   var $mainDiv = document.createElement('div');
   $mainDiv.className = 'col-50 padding-0-7-20 render-div';
   var $wrapperDiv = document.createElement('div');
@@ -71,6 +77,7 @@ function renderLists(obj) {
   $buttonDiv.className = 'col-full text-center padding-t20-button';
   var $button = document.createElement('button');
   $button.setAttribute('data-malId', $malId);
+  // try obj.malId?
   $button.className = 'fav-btn-false';
   $button.textContent = 'Add to Favorite';
   if (data.favorite.length !== 0) {
@@ -83,8 +90,6 @@ function renderLists(obj) {
   }
 
   $buttonDiv.appendChild($button);
-
-  // END OF BUTTON
   $rowDiv.appendChild($buttonDiv);
   $rowDiv.appendChild($titleHeader);
   $rowDiv.appendChild($paragraph);
@@ -95,23 +100,35 @@ function renderLists(obj) {
   $mainDiv.appendChild($wrapperDiv);
 
   return $mainDiv;
-
 }
 $xhrRandom.send();
 // end of feature 1
 
 // feature 2
 var $viewRandom = document.querySelector('.random-view');
-var $viewRecommend = document.querySelector('.genre-view');
-window.addEventListener('DOMContentLoaded', loadview);
+var $viewGenre = document.querySelector('.genre-view');
+var $viewFavorite = document.querySelector('.favorite-view');
+window.addEventListener('DOMContentLoaded', loadView);
 
-function loadview(event) {
+function loadView(event) {
   if (data.view === 'random-view') {
     $viewRandom.className = 'random-view';
-    $viewRecommend.className = 'genre-view hidden';
+    $viewGenre.className = 'genre-view hidden';
+    $viewFavorite.className = 'favorite-view hidden';
   } else if (data.view === 'genre-view') {
     $viewRandom.className = 'random-view hidden';
-    $viewRecommend.className = 'genre-view';
+    $viewGenre.className = 'genre-view';
+    $viewFavorite.className = 'favorite-view hidden';
+  } else if (data.view === 'favorite-view') {
+    $viewRandom.className = 'random-view hidden';
+    $viewGenre.className = 'genre-view hidden';
+    $viewFavorite.className = 'favorite-view';
+    if (data.favorite.length !== 0) {
+      for (var i = 0; i < data.favorite.length; i++) {
+        $malId = data.favorite[i].malId;
+        $favoriteDivEl.appendChild(renderLists(data.favorite[i]));
+      }
+    }
   }
 }
 
@@ -135,7 +152,7 @@ function selectGenre(event) {
     if (prop === event.target.value) {
       $genreID = data.genres[0][prop];
       data.view = 'genre-view';
-      loadview(data.view);
+      loadView();
       break;
     }
   }
@@ -177,9 +194,7 @@ function getGenre(genre) {
 }
 
 // FEATURE 4 for favorite button bubbling and capturing
-
 var $favBtn = document.querySelector('.main-container');
-
 $favBtn.addEventListener('click', favoriteButton);
 
 function favoriteButton(event) {
@@ -191,12 +206,35 @@ function favoriteButton(event) {
         data.favorite.unshift(onPage[i]);
       }
     }
+  } else if (event.target.getAttribute('class') === 'fav-btn-true' && event.target.tagName === 'BUTTON') {
+    event.target.className = 'fav-btn-false';
+    event.target.textContent = 'Add to Favorite';
+    var $closestAncestor = event.target.closest('.render-div');
+    $closestAncestor.remove();
+    for (var k = 0; k < data.favorite.length; k++) {
+      if (parseInt(event.target.getAttribute('data-malid')) === data.favorite[k].malId) {
+        data.favorite.splice(k, 1);
+        if (data.favorite.length === 0) {
+          var $defaultNoFav = document.querySelector('.default-no-fav');
+          $defaultNoFav.className = 'default-no-fav text-center';
+        }
+      }
+    }
   }
 }
 
-// *** BELOW IS FOR THE DOM EVENT DELEGATION***
-// if (event.target.tagName === 'BUTTON') {
-//   // debugger;
-//   var $closestAncestor = event.target.closest('.render-div');
-//   console.log('closest .render-div: ', $closestAncestor);
-// }
+// FEATURE 5 VIEW-FAVORITE
+var $favoriteLink = document.querySelector('.anime-favorite');
+$favoriteLink.addEventListener('click', goToFavorite);
+
+function goToFavorite(event) {
+  $selectGenre.selectedIndex = 0;
+  event.preventDefault();
+  $favoriteDivEl.replaceChildren();
+  data.view = 'favorite-view';
+  loadView(data.view);
+  if (data.favorite.length !== 0) {
+    var $defaultNoFav = document.querySelector('.default-no-fav');
+    $defaultNoFav.className = 'default-no-fav text-center hidden';
+  }
+}
