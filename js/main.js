@@ -1,4 +1,6 @@
 var random = [];
+var onPage = [];
+var $malId;
 
 var $animeRandom = document.querySelector('.anime-random');
 $animeRandom.addEventListener('click', loadview);
@@ -14,6 +16,7 @@ $xhrRandom.responseType = 'json';
 $xhrRandom.addEventListener('load', loading);
 
 function loading(event) {
+  onPage = [];
   random.push($xhrRandom.response);
   for (var i = 0; i < 3; i++) {
     var randomObj = {};
@@ -31,9 +34,18 @@ function loading(event) {
     if (random[0].data[randomData].synopsis) {
       randomObj.synopsis = random[0].data[randomData].synopsis;
     } else {
-      randomObj.synopsis = 'No synopsis information has been added to this title.';
+      randomObj.synopsis = 'No synopsis information has been added to this title. Update for synopsis coming soon.';
     }
 
+    randomObj.malId = random[0].data[randomData].mal_id;
+    // var favid = random[0].data[randomData].mal_id;
+    $malId = random[0].data[randomData].mal_id;
+    // console.log('random[0].data[randomData].mal_id: ', random[0].data[randomData].mal_id);
+    // console.log('favid: ', favid);
+    // console.log('global $malID', $malId);
+    onPage.push(randomObj);
+
+    // data.favorite.push() random[0].
     $randomDivEl.appendChild(renderLists(randomObj));
     random[0].data.splice(randomData, 1);
   }
@@ -56,9 +68,21 @@ function renderLists(obj) {
   $titleHeader.className = 'title-font';
   $titleHeader.textContent = obj.title;
   var $paragraph = document.createElement('p');
-  $paragraph.className = 'height-78 info-para overflow-ellipsis';
+  $paragraph.className = 'height-68 info-para overflow-ellipsis';
   $paragraph.textContent = obj.synopsis;
 
+  // FOR BUTTON
+  var $buttonDiv = document.createElement('div');
+  $buttonDiv.className = 'col-full text-center padding-t20-button';
+  var $button = document.createElement('button');
+  $button.className = 'fav-btn-false';
+  $button.setAttribute('data-malId', $malId);
+  $button.textContent = 'Add to Favorite';
+
+  $buttonDiv.appendChild($button);
+
+  // END OF BUTTON
+  $rowDiv.appendChild($buttonDiv);
   $rowDiv.appendChild($titleHeader);
   $rowDiv.appendChild($paragraph);
   $infoColDiv.appendChild($rowDiv);
@@ -123,6 +147,7 @@ function selectGenre(event) {
 }
 
 function getGenre(genre) {
+  onPage = [];
   for (var i = 0; i < 12; i++) {
     var genreObj = {};
     if (genre.data[i].images.jpg.large_image_url) {
@@ -138,8 +163,28 @@ function getGenre(genre) {
     if (genre.data[i].synopsis) {
       genreObj.synopsis = genre.data[i].synopsis;
     } else {
-      genreObj.synopsis = 'No synopsis information has been added to this title.';
+      genreObj.synopsis = 'No synopsis information has been added to this title. Update for synopsis coming soon.';
     }
+
+    genreObj.malId = genre.data[i].mal_id;
+    $malId = genre.data[i].mal_id;
+    // console.log('mal id on genre', genre.data[i].mal_id);
+    // console.log('global $malId for genre', $malId);
+    onPage.push(genreObj);
     $genreDivEl.appendChild(renderLists(genreObj));
   }
 }
+
+// FEATURE 4 for favorite button bubbling and capturing
+// $selectGenre.addEventListener('click', favoriteButton);
+
+var $favBtn = document.querySelector('.main-container');
+
+$favBtn.addEventListener('click', favoriteButton);
+function favoriteButton(event) {
+
+  // console.log(event.target.getAttribute('data-malid'));
+  // use the event target to change the className to change the color of the button.
+}
+// var $favButton = document.querySelector('button');
+// $favButton.addEventListener('click', favoriteButton);
