@@ -1,4 +1,6 @@
 var random = [];
+var onPage = [];
+var $malId;
 
 var $animeRandom = document.querySelector('.anime-random');
 $animeRandom.addEventListener('click', loadview);
@@ -14,6 +16,7 @@ $xhrRandom.responseType = 'json';
 $xhrRandom.addEventListener('load', loading);
 
 function loading(event) {
+  onPage = [];
   random.push($xhrRandom.response);
   for (var i = 0; i < 3; i++) {
     var randomObj = {};
@@ -31,8 +34,12 @@ function loading(event) {
     if (random[0].data[randomData].synopsis) {
       randomObj.synopsis = random[0].data[randomData].synopsis;
     } else {
-      randomObj.synopsis = 'No synopsis information has been added to this title.';
+      randomObj.synopsis = 'No synopsis information has been added to this title. Update for synopsis coming soon.';
     }
+
+    randomObj.malId = random[0].data[randomData].mal_id;
+    $malId = random[0].data[randomData].mal_id;
+    onPage.push(randomObj);
 
     $randomDivEl.appendChild(renderLists(randomObj));
     random[0].data.splice(randomData, 1);
@@ -41,7 +48,7 @@ function loading(event) {
 
 function renderLists(obj) {
   var $mainDiv = document.createElement('div');
-  $mainDiv.className = 'col-50 padding-0-7-20';
+  $mainDiv.className = 'col-50 padding-0-7-20 render-div';
   var $wrapperDiv = document.createElement('div');
   $wrapperDiv.className = 'row wrapper col-full col-50 justify-center align-center padding-10';
   var $imgDiv = document.createElement('div');
@@ -56,9 +63,29 @@ function renderLists(obj) {
   $titleHeader.className = 'title-font';
   $titleHeader.textContent = obj.title;
   var $paragraph = document.createElement('p');
-  $paragraph.className = 'height-78 info-para overflow-ellipsis';
+  $paragraph.className = 'height-68 info-para overflow-ellipsis';
   $paragraph.textContent = obj.synopsis;
 
+  // FOR BUTTON
+  var $buttonDiv = document.createElement('div');
+  $buttonDiv.className = 'col-full text-center padding-t20-button';
+  var $button = document.createElement('button');
+  $button.setAttribute('data-malId', $malId);
+  $button.className = 'fav-btn-false';
+  $button.textContent = 'Add to Favorite';
+  if (data.favorite.length !== 0) {
+    for (var i = 0; i < data.favorite.length; i++) {
+      if ($malId === data.favorite[i].malId) {
+        $button.textContent = 'Added to Favorite';
+        $button.className = 'fav-btn-true';
+      }
+    }
+  }
+
+  $buttonDiv.appendChild($button);
+
+  // END OF BUTTON
+  $rowDiv.appendChild($buttonDiv);
   $rowDiv.appendChild($titleHeader);
   $rowDiv.appendChild($paragraph);
   $infoColDiv.appendChild($rowDiv);
@@ -123,6 +150,7 @@ function selectGenre(event) {
 }
 
 function getGenre(genre) {
+  onPage = [];
   for (var i = 0; i < 12; i++) {
     var genreObj = {};
     if (genre.data[i].images.jpg.large_image_url) {
@@ -138,8 +166,37 @@ function getGenre(genre) {
     if (genre.data[i].synopsis) {
       genreObj.synopsis = genre.data[i].synopsis;
     } else {
-      genreObj.synopsis = 'No synopsis information has been added to this title.';
+      genreObj.synopsis = 'No synopsis information has been added to this title. Update for synopsis coming soon.';
     }
+
+    genreObj.malId = genre.data[i].mal_id;
+    $malId = genre.data[i].mal_id;
+    onPage.push(genreObj);
     $genreDivEl.appendChild(renderLists(genreObj));
   }
 }
+
+// FEATURE 4 for favorite button bubbling and capturing
+
+var $favBtn = document.querySelector('.main-container');
+
+$favBtn.addEventListener('click', favoriteButton);
+
+function favoriteButton(event) {
+  if (event.target.getAttribute('class') === 'fav-btn-false') {
+    event.target.className = 'fav-btn-true';
+    event.target.textContent = 'Added to Favorite';
+    for (var i = 0; i < onPage.length; i++) {
+      if (onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
+        data.favorite.unshift(onPage[i]);
+      }
+    }
+  }
+}
+
+// *** BELOW IS FOR THE DOM EVENT DELEGATION***
+// if (event.target.tagName === 'BUTTON') {
+//   // debugger;
+//   var $closestAncestor = event.target.closest('.render-div');
+//   console.log('closest .render-div: ', $closestAncestor);
+// }
