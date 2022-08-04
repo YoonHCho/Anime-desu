@@ -38,14 +38,9 @@ function loading(event) {
     }
 
     randomObj.malId = random[0].data[randomData].mal_id;
-    // var favid = random[0].data[randomData].mal_id;
     $malId = random[0].data[randomData].mal_id;
-    // console.log('random[0].data[randomData].mal_id: ', random[0].data[randomData].mal_id);
-    // console.log('favid: ', favid);
-    // console.log('global $malID', $malId);
     onPage.push(randomObj);
 
-    // data.favorite.push() random[0].
     $randomDivEl.appendChild(renderLists(randomObj));
     random[0].data.splice(randomData, 1);
   }
@@ -199,7 +194,7 @@ function favoriteButton(event) {
   }
 }
 
-// *** BELOW IS FOR THE DOM how it will render HTML***
+// *** BELOW IS FOR THE DOM EVENT DELEGATION***
 // if (event.target.tagName === 'BUTTON') {
 //   // debugger;
 //   var $closestAncestor = event.target.closest('.render-div');
