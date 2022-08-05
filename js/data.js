@@ -1,7 +1,7 @@
 /* exported data */
 
 var data = {
-  view: 'random-view', /* need to change genre-view */
+  view: 'random-view',
   genres: [
     {
       action: '1',
@@ -18,6 +18,5 @@ var data = {
       suspense: '41'
     }
   ],
-  favorite: [],
-  favoriteId: 1
+  favorite: []
 };
