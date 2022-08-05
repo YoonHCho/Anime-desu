@@ -62,14 +62,6 @@ select:hover {
   height: 60px;
 }
 
-.font-size2r {
-  font-size: 2rem;
-}
-
-.margin-b10 {
-  margin-bottom: 10px;
-}
-
 .padding-0-7-20 {
   padding: 0 7px 20px;
 }
@@ -111,10 +103,6 @@ img {
   font-weight: 300;
   overflow: auto;
   margin: 0;
-}
-
-.overflow-ellipsis {
-  text-overflow: ellipsis;
 }
 
 .height-100 {
@@ -172,10 +160,6 @@ button:hover {
 @media only screen and (min-width: 768px) {
   .margin-r35 {
     margin-right: 35px;
-  }
-
-  .margin-l35 {
-    margin-left: 35px;
   }
 
   .justify-center-nav {

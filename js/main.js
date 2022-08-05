@@ -63,10 +63,10 @@ function renderLists(obj) {
   var $rowDiv = document.createElement('div');
   $rowDiv.className = 'row height-100';
   var $titleHeader = document.createElement('h4');
-  $titleHeader.className = 'title-font';
+  $titleHeader.className = 'title-font padding-l10';
   $titleHeader.textContent = obj.title;
   var $paragraph = document.createElement('p');
-  $paragraph.className = 'height-68 info-para overflow-ellipsis';
+  $paragraph.className = 'height-68 info-para padding-l10';
   $paragraph.textContent = obj.synopsis;
 
   var $buttonDiv = document.createElement('div');
