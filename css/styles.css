@@ -44,14 +44,11 @@
   text-decoration: none;
 }
 
-select:hover {
-  cursor: pointer;
-}
-
 .select-box {
   width: 220px;
   height: 36px;
   border-radius: 5px;
+  transition: color 0.5s;
 }
 
 .font-black {
@@ -124,6 +121,26 @@ img {
 
 button:hover {
   cursor: pointer;
+  width: 85%;
+}
+
+select:hover {
+  cursor: pointer;
+  color: lightslategray;
+}
+
+h4 {
+  width: 100%;
+}
+
+a {
+  transition: font-size 1s;
+}
+
+a:hover {
+  font-size: 25px;
+  color: rgba(64, 209, 164, 0.42);
+  text-decoration: underline;
 }
 
 .fav-btn-false {
@@ -135,6 +152,7 @@ button:hover {
   font-weight: 400;
   background-color: #ff8b8b;
   color: white;
+  transition: width 1s;
 }
 
 .fav-btn-true {
@@ -146,6 +164,7 @@ button:hover {
   font-weight: 400;
   background-color: #243a73;
   color: white;
+  transition: width 1s;
 }
 
 .text-center {
@@ -156,6 +175,58 @@ button:hover {
   box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
   border-radius: 5px;
 }
+
+.margin-auto {
+  margin: auto;
+}
+
+/* +++++++++++++++++++++++++++++++++++++++++++++++ */
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+
+  50%,
+  100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
+/* ++++++++++++++++++++++++++++++ */
 
 @media only screen and (min-width: 768px) {
   .margin-r35 {

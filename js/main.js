@@ -11,6 +11,7 @@ $animeRandom.addEventListener('click', function () {
 var $randomDivEl = document.querySelector('.random');
 var $genreDivEl = document.querySelector('.genre');
 var $favoriteDivEl = document.querySelector('.favorite');
+var $loadScreen = document.querySelector('.load-screen');
 
 var $xhrRandom = new XMLHttpRequest();
 var randomPage = Math.floor(Math.random() * 934 + 1);
@@ -19,6 +20,7 @@ $xhrRandom.responseType = 'json';
 $xhrRandom.addEventListener('load', loading);
 
 function loading(event) {
+  $loadScreen.className = 'load-screen row justify-center';
   onPage = [];
   random.push($xhrRandom.response);
   for (var i = 0; i < 3; i++) {
@@ -47,6 +49,7 @@ function loading(event) {
     $randomDivEl.appendChild(renderLists(randomObj));
     random[0].data.splice(randomData, 1);
   }
+  $loadScreen.className = 'load-screen row justify-center hidden';
 }
 
 function renderLists(obj) {
@@ -104,6 +107,7 @@ var $viewFavorite = document.querySelector('.favorite-view');
 window.addEventListener('DOMContentLoaded', loadView);
 
 function loadView(event) {
+  $loadScreen.className = 'load-screen row justify-center';
   if (data.view === 'random-view') {
     $viewRandom.className = 'random-view';
     $viewGenre.className = 'genre-view hidden';
@@ -127,6 +131,7 @@ function loadView(event) {
       $defaultNoFav.className = 'default-no-fav text-center hidden';
     }
   }
+  $loadScreen.className = 'load-screen row justify-center hidden';
 }
 
 var $selectGenre = document.getElementById('genre');
@@ -155,10 +160,13 @@ function selectGenre(event) {
 
   var $xhrGenre = new XMLHttpRequest();
   $xhrGenre.open('GET', 'https://api.jikan.moe/v4/anime?genres=' + $genreID + '&page=1&sfw=true');
+  $loadScreen.className = 'load-screen row justify-center';
   $xhrGenre.responseType = 'json';
   $xhrGenre.addEventListener('load', function () {
+    $loadScreen.className = 'load-screen row justify-center hidden';
     getGenre($xhrGenre.response);
   });
+
   $xhrGenre.send();
 }
 
@@ -233,4 +241,5 @@ function goToFavorite(event) {
     var $defaultNoFav = document.querySelector('.default-no-fav');
     $defaultNoFav.className = 'default-no-fav text-center hidden';
   }
+
 }
