@@ -4,7 +4,6 @@ var $malId;
 
 var $animeRandom = document.querySelector('.anime-random');
 $animeRandom.addEventListener('click', function () {
-  $animeRandom.preventDefault();
   data.view = 'random-view';
   loadView(data.view);
 });
@@ -83,7 +82,7 @@ function renderLists(obj) {
   if (data.favorite.length !== 0) {
     for (var i = 0; i < data.favorite.length; i++) {
       if ($malId === data.favorite[i].malId) {
-        $button.textContent = 'Added to Favorite';
+        $button.textContent = 'Remove from Favorite';
         $button.className = 'fav-btn-true';
       }
     }
@@ -200,7 +199,7 @@ $favBtn.addEventListener('click', favoriteButton);
 function favoriteButton(event) {
   if (event.target.getAttribute('class') === 'fav-btn-false') {
     event.target.className = 'fav-btn-true';
-    event.target.textContent = 'Added to Favorite';
+    event.target.textContent = 'Remove from Favorite';
     for (var i = 0; i < onPage.length; i++) {
       if (onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
         data.favorite.unshift(onPage[i]);
@@ -209,8 +208,10 @@ function favoriteButton(event) {
   } else if (event.target.getAttribute('class') === 'fav-btn-true' && event.target.tagName === 'BUTTON') {
     event.target.className = 'fav-btn-false';
     event.target.textContent = 'Add to Favorite';
-    var $closestAncestor = event.target.closest('.render-div');
-    $closestAncestor.remove();
+    if (data.view === 'favorite-view') {
+      var $closestAncestor = event.target.closest('.render-div');
+      $closestAncestor.remove();
+    }
     for (var k = 0; k < data.favorite.length; k++) {
       if (parseInt(event.target.getAttribute('data-malid')) === data.favorite[k].malId) {
         data.favorite.splice(k, 1);
