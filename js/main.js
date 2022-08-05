@@ -8,11 +8,9 @@ $animeRandom.addEventListener('click', function () {
   loadView(data.view);
 });
 
-// Feature 1 START
 var $randomDivEl = document.querySelector('.random');
 var $genreDivEl = document.querySelector('.genre');
 var $favoriteDivEl = document.querySelector('.favorite');
-// var $favDiv = document.querySelector('.font-yellowtail');
 
 var $xhrRandom = new XMLHttpRequest();
 var randomPage = Math.floor(Math.random() * 934 + 1);
@@ -21,7 +19,6 @@ $xhrRandom.responseType = 'json';
 $xhrRandom.addEventListener('load', loading);
 
 function loading(event) {
-  // data.onPage = [];
   onPage = [];
   random.push($xhrRandom.response);
   for (var i = 0; i < 3; i++) {
@@ -45,7 +42,6 @@ function loading(event) {
 
     randomObj.malId = random[0].data[randomData].mal_id;
     $malId = random[0].data[randomData].mal_id;
-    // data.onPage.push(randomObj);
     onPage.push(randomObj);
 
     $randomDivEl.appendChild(renderLists(randomObj));
@@ -73,12 +69,10 @@ function renderLists(obj) {
   $paragraph.className = 'height-68 info-para overflow-ellipsis';
   $paragraph.textContent = obj.synopsis;
 
-  // FOR BUTTON
   var $buttonDiv = document.createElement('div');
   $buttonDiv.className = 'col-full text-center padding-t20-button';
   var $button = document.createElement('button');
   $button.setAttribute('data-malId', $malId);
-  // try obj.malId?
   $button.className = 'fav-btn-false';
   $button.textContent = 'Add to Favorite';
   if (data.favorite.length !== 0) {
@@ -103,9 +97,7 @@ function renderLists(obj) {
   return $mainDiv;
 }
 $xhrRandom.send();
-// end of feature 1
 
-// feature 2
 var $viewRandom = document.querySelector('.random-view');
 var $viewGenre = document.querySelector('.genre-view');
 var $viewFavorite = document.querySelector('.favorite-view');
@@ -137,7 +129,6 @@ function loadView(event) {
   }
 }
 
-// feature 2 to render genre list
 var $selectGenre = document.getElementById('genre');
 $selectGenre.addEventListener('change', selectGenre);
 
@@ -172,7 +163,6 @@ function selectGenre(event) {
 }
 
 function getGenre(genre) {
-  // data.onPage = [];
   onPage = [];
   for (var i = 0; i < 12; i++) {
     var genreObj = {};
@@ -194,13 +184,11 @@ function getGenre(genre) {
 
     genreObj.malId = genre.data[i].mal_id;
     $malId = genre.data[i].mal_id;
-    // data.onPage.push(genreObj);
     onPage.push(genreObj);
     $genreDivEl.appendChild(renderLists(genreObj));
   }
 }
 
-// FEATURE 4 for favorite button bubbling and capturing
 var $favBtn = document.querySelector('.main-container');
 $favBtn.addEventListener('click', favoriteButton);
 
@@ -208,12 +196,9 @@ function favoriteButton(event) {
   if (event.target.getAttribute('class') === 'fav-btn-false') {
     event.target.className = 'fav-btn-true';
     event.target.textContent = 'Remove from Favorite';
-    // for (var i = 0; i < data.onPage.length; i++) {
     for (var i = 0; i < onPage.length; i++) {
       if (onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
-      // if (data.onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
         data.favorite.unshift(onPage[i]);
-        // data.favorite.unshift(data.onPage[i]);
       }
     }
   } else if (event.target.getAttribute('class') === 'fav-btn-true' && event.target.tagName === 'BUTTON') {
@@ -235,7 +220,6 @@ function favoriteButton(event) {
   }
 }
 
-// FEATURE 5 VIEW-FAVORITE
 var $favoriteLink = document.querySelector('.anime-favorite');
 $favoriteLink.addEventListener('click', goToFavorite);
 
