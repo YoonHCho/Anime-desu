@@ -8,7 +8,6 @@ $animeRandom.addEventListener('click', function () {
   loadView(data.view);
 });
 
-// Feature 1 START
 var $randomDivEl = document.querySelector('.random');
 var $genreDivEl = document.querySelector('.genre');
 var $favoriteDivEl = document.querySelector('.favorite');
@@ -51,7 +50,6 @@ function loading(event) {
 }
 
 function renderLists(obj) {
-
   var $mainDiv = document.createElement('div');
   $mainDiv.className = 'col-50 padding-0-7-20 render-div';
   var $wrapperDiv = document.createElement('div');
@@ -71,12 +69,10 @@ function renderLists(obj) {
   $paragraph.className = 'height-68 info-para overflow-ellipsis';
   $paragraph.textContent = obj.synopsis;
 
-  // FOR BUTTON
   var $buttonDiv = document.createElement('div');
   $buttonDiv.className = 'col-full text-center padding-t20-button';
   var $button = document.createElement('button');
   $button.setAttribute('data-malId', $malId);
-  // try obj.malId?
   $button.className = 'fav-btn-false';
   $button.textContent = 'Add to Favorite';
   if (data.favorite.length !== 0) {
@@ -101,9 +97,7 @@ function renderLists(obj) {
   return $mainDiv;
 }
 $xhrRandom.send();
-// end of feature 1
 
-// feature 2
 var $viewRandom = document.querySelector('.random-view');
 var $viewGenre = document.querySelector('.genre-view');
 var $viewFavorite = document.querySelector('.favorite-view');
@@ -128,10 +122,13 @@ function loadView(event) {
         $favoriteDivEl.appendChild(renderLists(data.favorite[i]));
       }
     }
+    if (data.favorite.length !== 0) {
+      var $defaultNoFav = document.querySelector('.default-no-fav');
+      $defaultNoFav.className = 'default-no-fav text-center hidden';
+    }
   }
 }
 
-// feature 2 to render genre list
 var $selectGenre = document.getElementById('genre');
 $selectGenre.addEventListener('change', selectGenre);
 
@@ -192,7 +189,6 @@ function getGenre(genre) {
   }
 }
 
-// FEATURE 4 for favorite button bubbling and capturing
 var $favBtn = document.querySelector('.main-container');
 $favBtn.addEventListener('click', favoriteButton);
 
@@ -224,7 +220,6 @@ function favoriteButton(event) {
   }
 }
 
-// FEATURE 5 VIEW-FAVORITE
 var $favoriteLink = document.querySelector('.anime-favorite');
 $favoriteLink.addEventListener('click', goToFavorite);
 

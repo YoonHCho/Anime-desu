@@ -20,3 +20,15 @@ var data = {
   ],
   favorite: []
 };
+
+var previousDataJSON = localStorage.getItem('ajax-local-storage');
+if (previousDataJSON !== null) {
+  data = JSON.parse(previousDataJSON);
+}
+
+window.addEventListener('beforeunload', beforeUnload);
+
+function beforeUnload(event) {
+  var dataJSON = JSON.stringify(data);
+  localStorage.setItem('ajax-local-storage', dataJSON);
+}
