@@ -1,28 +1,42 @@
 var random = [];
 var onPage = [];
 var $malId;
-
-var $animeRandom = document.querySelector('.anime-random');
-$animeRandom.addEventListener('click', function () {
-  data.view = 'random-view';
-  loadView(data.view);
-});
-
+var $loadScreen = document.querySelector('.load-screen');
+var $viewRandom = document.querySelector('.random-view');
+var $viewGenre = document.querySelector('.genre-view');
+var $viewFavorite = document.querySelector('.favorite-view');
 var $randomDivEl = document.querySelector('.random');
 var $genreDivEl = document.querySelector('.genre');
 var $favoriteDivEl = document.querySelector('.favorite');
-var $loadScreen = document.querySelector('.load-screen');
+var $animeRandom = document.querySelector('.anime-random');
 
-var $xhrRandom = new XMLHttpRequest();
-var randomPage = Math.floor(Math.random() * 934 + 1);
-$xhrRandom.open('GET', 'https://api.jikan.moe/v4/anime?sfw=true&page=' + randomPage);
-$xhrRandom.responseType = 'json';
-$xhrRandom.addEventListener('load', loading);
+$animeRandom.addEventListener('click', function () {
+  $randomDivEl.replaceChildren();
+  firstLoad();
+});
+
+if (data.view === 'random-view') {
+  firstLoad();
+}
+
+function firstLoad() {
+  data.view = 'random-view';
+  loadView(data.view);
+  var $xhrRandom = new XMLHttpRequest();
+  var randomPage = Math.floor(Math.random() * 934 + 1);
+  $xhrRandom.open('GET', 'https://api.jikan.moe/v4/anime?sfw=true&page=' + randomPage);
+  $loadScreen.className = 'load-screen row justify-center';
+  $xhrRandom.responseType = 'json';
+  $xhrRandom.addEventListener('load', function () {
+    $loadScreen.className = 'load-screen row justify-center hidden';
+    random.push($xhrRandom.response);
+    loading();
+  });
+  $xhrRandom.send();
+}
 
 function loading(event) {
-  $loadScreen.className = 'load-screen row justify-center';
   onPage = [];
-  random.push($xhrRandom.response);
   for (var i = 0; i < 3; i++) {
     var randomObj = {};
     var randomData = parseInt(Math.floor(Math.random() * random[0].data.length));
@@ -49,7 +63,7 @@ function loading(event) {
     $randomDivEl.appendChild(renderLists(randomObj));
     random[0].data.splice(randomData, 1);
   }
-  $loadScreen.className = 'load-screen row justify-center hidden';
+
 }
 
 function renderLists(obj) {
@@ -99,15 +113,11 @@ function renderLists(obj) {
 
   return $mainDiv;
 }
-$xhrRandom.send();
 
-var $viewRandom = document.querySelector('.random-view');
-var $viewGenre = document.querySelector('.genre-view');
-var $viewFavorite = document.querySelector('.favorite-view');
 window.addEventListener('DOMContentLoaded', loadView);
 
 function loadView(event) {
-  $loadScreen.className = 'load-screen row justify-center';
+  // debugger;
   if (data.view === 'random-view') {
     $viewRandom.className = 'random-view';
     $viewGenre.className = 'genre-view hidden';
@@ -157,7 +167,6 @@ function selectGenre(event) {
       break;
     }
   }
-
   var $xhrGenre = new XMLHttpRequest();
   $xhrGenre.open('GET', 'https://api.jikan.moe/v4/anime?genres=' + $genreID + '&page=1&sfw=true');
   $loadScreen.className = 'load-screen row justify-center';
@@ -241,5 +250,4 @@ function goToFavorite(event) {
     var $defaultNoFav = document.querySelector('.default-no-fav');
     $defaultNoFav.className = 'default-no-fav text-center hidden';
   }
-
 }
