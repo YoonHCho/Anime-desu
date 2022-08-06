@@ -180,8 +180,6 @@ a:hover {
   margin: auto;
 }
 
-/* +++++++++++++++++++++++++++++++++++++++++++++++ */
-
 .lds-facebook {
   display: inline-block;
   position: relative;
@@ -225,8 +223,6 @@ a:hover {
     height: 32px;
   }
 }
-
-/* ++++++++++++++++++++++++++++++ */
 
 @media only screen and (min-width: 768px) {
   .margin-r35 {
