@@ -1,3 +1,3 @@
-# ajax-project
+# Anime-desu
 
-A dynamic HTML, CSS, and JavaScript solo project.
+A web application for Anime beginners who wants to get Anime recommendations
