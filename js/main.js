@@ -29,6 +29,7 @@ function firstLoad() {
   $xhrRandom.responseType = 'json';
   $xhrRandom.addEventListener('load', function () {
     $loadScreen.className = 'load-screen row justify-center hidden';
+    random = [];
     random.push($xhrRandom.response);
     loading();
   });
@@ -117,7 +118,6 @@ function renderLists(obj) {
 window.addEventListener('DOMContentLoaded', loadView);
 
 function loadView(event) {
-  // debugger;
   if (data.view === 'random-view') {
     $viewRandom.className = 'random-view';
     $viewGenre.className = 'genre-view hidden';
