@@ -38,7 +38,7 @@ function firstLoad() {
 
 function loading(event) {
   onPage = [];
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     var randomObj = {};
     var randomData = parseInt(Math.floor(Math.random() * random[0].data.length));
     if (random[0].data[randomData].images.jpg.large_image_url) {
