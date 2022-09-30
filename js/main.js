@@ -244,7 +244,7 @@ $favoriteLink.addEventListener('click', goToFavorite);
 function goToFavorite(event) {
   $selectGenre.selectedIndex = 0;
   event.preventDefault();
-  // $favoriteDivEl.replaceChildren();
+  $favoriteDivEl.replaceChildren();
   data.view = 'favorite-view';
   loadView(data.view);
   if (data.favorite.length !== 0) {
