@@ -3,12 +3,16 @@
 ### A web application for Anime beginners who wants to get Anime recommendations
 
 Although I do not watch Animes so much now, I decided to create this app since
-I used to enjoy watching when I was younger. I thought look at the pictures and
+I used to enjoy watching when I was younger. I thought looking at the pictures and
 reading the synopsis of the Anime will bring back memories and thus I will enjoy
-working on my first Project. I also wish the users of this app to be informational
-and enjoy using it as much as I enjoyed creating the app.
+working on my first Project. I also wish the users of this app to get additional
+information of different Animes and enjoy using it as much as I enjoyed creating the app.
 
+### Link to App and short sample of the app
 [To view my app Anime-desu](yoonhcho.github.io/Anime-desu/)
+(https://github.com/YoonHCho/Anime-desu/images/ajax.gif "sample")
+
+
 
 ### Technologies Used
 * Used **Javascript** to manipulate the webpage behavior, **HTML** and **CSS**
