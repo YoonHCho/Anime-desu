@@ -1,5 +1,4 @@
 var random = [];
-var onPage = [];
 var $malId;
 var $loadScreen = document.querySelector('.load-screen');
 var $viewRandom = document.querySelector('.random-view');
@@ -9,6 +8,7 @@ var $randomDivEl = document.querySelector('.random');
 var $genreDivEl = document.querySelector('.genre');
 var $favoriteDivEl = document.querySelector('.favorite');
 var $animeRandom = document.querySelector('.anime-random');
+var $genreID;
 
 $animeRandom.addEventListener('click', function () {
   $randomDivEl.replaceChildren();
@@ -37,7 +37,8 @@ function firstLoad() {
 }
 
 function loading(event) {
-  onPage = [];
+  data.onPage = [];
+  $randomDivEl.replaceChildren();
   for (var i = 0; i < 4; i++) {
     var randomObj = {};
     var randomData = parseInt(Math.floor(Math.random() * random[0].data.length));
@@ -59,7 +60,7 @@ function loading(event) {
 
     randomObj.malId = random[0].data[randomData].mal_id;
     $malId = random[0].data[randomData].mal_id;
-    onPage.push(randomObj);
+    data.onPage.push(randomObj);
 
     $randomDivEl.appendChild(renderLists(randomObj));
     random[0].data.splice(randomData, 1);
@@ -77,7 +78,7 @@ function renderLists(obj) {
   var $img = document.createElement('img');
   $img.setAttribute('src', obj.imgUrl);
   var $infoColDiv = document.createElement('div');
-  $infoColDiv.className = 'col-full col-50 info-col-padding align-self-start height-100';
+  $infoColDiv.className = 'col-full col-50 align-self-start height-100';
   var $rowDiv = document.createElement('div');
   $rowDiv.className = 'row height-100';
   var $titleHeader = document.createElement('h4');
@@ -118,22 +119,30 @@ function renderLists(obj) {
 window.addEventListener('DOMContentLoaded', loadView);
 
 function loadView(event) {
+  $randomDivEl.replaceChildren();
   if (data.view === 'random-view') {
     $viewRandom.className = 'random-view';
     $viewGenre.className = 'genre-view hidden';
     $viewFavorite.className = 'favorite-view hidden';
   } else if (data.view === 'genre-view') {
+    $genreDivEl.replaceChildren();
     $viewRandom.className = 'random-view hidden';
     $viewGenre.className = 'genre-view';
     $viewFavorite.className = 'favorite-view hidden';
+    if (data.onPage.length !== 0) {
+      for (var i = 0; i < data.onPage.length; i++) {
+        $malId = data.onPage[i].malId;
+        $genreDivEl.appendChild(renderLists(data.onPage[i]));
+      }
+    }
   } else if (data.view === 'favorite-view') {
     $viewRandom.className = 'random-view hidden';
     $viewGenre.className = 'genre-view hidden';
     $viewFavorite.className = 'favorite-view';
     if (data.favorite.length !== 0) {
-      for (var i = 0; i < data.favorite.length; i++) {
-        $malId = data.favorite[i].malId;
-        $favoriteDivEl.appendChild(renderLists(data.favorite[i]));
+      for (var j = 0; j < data.favorite.length; j++) {
+        $malId = data.favorite[j].malId;
+        $favoriteDivEl.appendChild(renderLists(data.favorite[j]));
       }
     }
     if (data.favorite.length !== 0) {
@@ -148,16 +157,8 @@ var $selectGenre = document.getElementById('genre');
 $selectGenre.addEventListener('change', selectGenre);
 
 function selectGenre(event) {
+  data.onPage = [];
   $genreDivEl.replaceChildren();
-  var $genreID;
-  var $genreHeader = document.querySelector('.genre-text');
-  if (event.target.value === 'sliceOfLife') {
-    $genreHeader.textContent = 'Results for Genre: Slice of Life';
-  } else if (event.target.value === 'sciFi') {
-    $genreHeader.textContent = 'Results for Genre: Sci-Fi';
-  } else {
-    $genreHeader.textContent = 'Results for Genre: ' + event.target.value[0].toUpperCase() + event.target.value.substring(1);
-  }
 
   for (var prop in data.genres[0]) {
     if (prop === event.target.value) {
@@ -180,7 +181,7 @@ function selectGenre(event) {
 }
 
 function getGenre(genre) {
-  onPage = [];
+  data.onPage = [];
   for (var i = 0; i < 12; i++) {
     var genreObj = {};
     if (genre.data[i].images.jpg.large_image_url) {
@@ -201,7 +202,7 @@ function getGenre(genre) {
 
     genreObj.malId = genre.data[i].mal_id;
     $malId = genre.data[i].mal_id;
-    onPage.push(genreObj);
+    data.onPage.push(genreObj);
     $genreDivEl.appendChild(renderLists(genreObj));
   }
 }
@@ -213,9 +214,9 @@ function favoriteButton(event) {
   if (event.target.getAttribute('class') === 'fav-btn-false') {
     event.target.className = 'fav-btn-true';
     event.target.textContent = 'Remove from Favorite';
-    for (var i = 0; i < onPage.length; i++) {
-      if (onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
-        data.favorite.unshift(onPage[i]);
+    for (var i = 0; i < data.onPage.length; i++) {
+      if (data.onPage[i].malId === parseInt(event.target.getAttribute('data-malid'))) {
+        data.favorite.unshift(data.onPage[i]);
       }
     }
   } else if (event.target.getAttribute('class') === 'fav-btn-true' && event.target.tagName === 'BUTTON') {
