@@ -68,7 +68,7 @@
 }
 
 .padding-l10 {
-  padding-left: 10px;
+  padding-left: 3px;
 }
 
 .padding-t20-button {
@@ -209,6 +209,10 @@ a:hover {
 .lds-facebook div:nth-child(3) {
   left: 56px;
   animation-delay: 0;
+}
+
+.padding-t-35 {
+  padding-top: 35px;
 }
 
 @keyframes lds-facebook {

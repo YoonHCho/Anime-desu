@@ -18,7 +18,8 @@ var data = {
       suspense: '41'
     }
   ],
-  favorite: []
+  favorite: [],
+  onPage: []
 };
 
 var previousDataJSON = localStorage.getItem('ajax-local-storage');
