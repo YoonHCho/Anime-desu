@@ -10,7 +10,7 @@ information of different Animes and enjoy using it as much as I enjoyed creating
 
 ### Link to App and short sample of the app
 [To view my app Anime-desu](yoonhcho.github.io/Anime-desu/)
-![alt text](https://github.com/YoonHCho/Anime-desu/images/ajax.gif "sample")
+![alt text](https://github.com/YoonHCho/Anime-desu/raw/master/images/ajax.gif "sample")
 
 
 
