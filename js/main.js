@@ -136,6 +136,7 @@ function loadView(event) {
       }
     }
   } else if (data.view === 'favorite-view') {
+    $favoriteDivEl.replaceChildren();
     $viewRandom.className = 'random-view hidden';
     $viewGenre.className = 'genre-view hidden';
     $viewFavorite.className = 'favorite-view';
