@@ -67,8 +67,8 @@
   padding: 10px;
 }
 
-.padding-l10 {
-  padding-left: 3px;
+.padding-left-15 {
+  padding-left: 15px;
 }
 
 .padding-t20-button {
@@ -98,7 +98,7 @@ img {
 .info-para {
   font-size: 16px;
   font-weight: 300;
-  overflow: auto;
+  overflow-y: hidden;
   margin: 0;
 }
 
